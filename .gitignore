@@ -1,0 +1,26 @@
+# Arquivos e pastas locais
+datasets/
+.env
+__pycache__/
+*.pyc
+
+# Ambientes virtuais
+venv/
+.env/
+.venv/
+
+# Cache e logs
+*.log
+*.tmp
+*.bak
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Streamlit cache
+.streamlit/
+
+# Configurações específicas do editor
+.vscode/
+.idea/

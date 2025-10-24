@@ -56,7 +56,6 @@ def parse_sentiment140(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def parse_date_series(s: pd.Series) -> pd.Series:
-    # Sentiment140 tem datas no formato string; tenta várias heurísticas
     try:
         return pd.to_datetime(s, errors="coerce")
     except Exception:
@@ -172,7 +171,7 @@ if st.button("Rodar análise no CSV", type="primary"):
     c3.metric("Negativos", f"{counts.get('negative',0)} ({perc.get('negative',0)}%)")
     st.bar_chart(counts.rename("linhas por classe"))
 
-    # --------- Série temporal (se houver 'date') ---------
+    # --------- Série temporal ---------
     if "date" in df.columns:
         st.subheader("Evolução diária (se houver data)")
         dts = parse_date_series(df["date"])
@@ -203,7 +202,8 @@ if st.button("Rodar análise no CSV", type="primary"):
                 top_words = dict(words.most_common(n_top))
                 st.bar_chart(pd.Series(top_words))
             else:
-                st.caption("Sem textos nessa classe.")   # --------- Exemplos por classe ---------
+                st.caption("Sem textos nessa classe.")   
+    # --------- Exemplos por classe ---------
     st.subheader("Exemplos por classe")
     n_show = st.slider("Exemplos por classe", 3, 20, 5)
     cols = ["text","sentiment_label","sentiment_score"]
